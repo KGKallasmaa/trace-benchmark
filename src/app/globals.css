@@ -1212,7 +1212,7 @@ body:has(.bench-page)::after {
 }
 .bench-status-copy {
   display: flex;
-  flex-direction: column;
+  gap: var(--ds-space-2-5);
   font-size: var(--ds-text-body-sm);
   line-height: var(--ds-leading-normal);
   white-space: nowrap;
@@ -1220,6 +1220,10 @@ body:has(.bench-page)::after {
 .bench-status-completed {
   min-height: 1lh;
   font-variant-numeric: tabular-nums;
+}
+.bench-status-completed:not(:empty)::before {
+  content: "·";
+  margin-right: var(--ds-space-2-5);
 }
 .bench-status-refresh {
   font-size: var(--ds-text-body-sm);

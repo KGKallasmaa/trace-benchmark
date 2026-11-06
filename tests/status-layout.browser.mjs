@@ -59,10 +59,10 @@ function stable(before, after, label) {
   for (const selector of selectors) {
     // The compact phone header keeps its schedule available to assistive tech.
     if (!before[selector].visible) continue;
-    // Font metrics may change text width and hero height; the header's height
-    // and the positions of its copy, actions, and following section must not.
+    // Font metrics may change text width and the inline completion's x position;
+    // header height and the positions of the copy, actions, and next section stay fixed.
     const dimensions = selector === ".bench-status" ? ["x", "y", "height"]
-      : selector === ".bench-status-actions" ? ["y"] : ["x", "y"];
+      : [".bench-status-actions", ".bench-status-completed"].includes(selector) ? ["y"] : ["x", "y"];
     for (const dimension of dimensions) assert.ok(Math.abs(before[selector][dimension] - after[selector][dimension]) <= 1,
       `${label}: ${selector} ${dimension} moved from ${before[selector][dimension]} to ${after[selector][dimension]}`);
   }
@@ -113,6 +113,11 @@ try {
     await page.locator('.bench-status-refresh[aria-hidden="true"]').waitFor({ state: "attached" });
     await frames(page);
     stable(refreshing, await geometry(page), `${label} refresh completion`);
+    const inline = await geometry(page);
+    if (inline[".bench-status-copy"].visible) {
+      assert.equal(inline[".bench-status-copy > span:first-child"].y, inline[".bench-status-completed"].y,
+        `${label}: schedule and last completion share one line`);
+    }
     const overflow = await page.evaluate(() => {
       const status = document.querySelector(".bench-status").getBoundingClientRect();
       return [...document.querySelectorAll(".bench-status-copy, .bench-status-chip, .bench-status-actions")]
