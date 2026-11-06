@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy, Check, Download, ArrowRight, X } from "lucide-react";
+import { Copy, Check, Download, ArrowRight, X, LoaderCircle } from "lucide-react";
 import { useQueryStates } from "nuqs";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
@@ -419,8 +419,11 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
         meta={
           run ? (
             <>
-              <i className={cn("bench-live", data.collecting && "is-collecting")} aria-hidden="true" />
-              {`${scoringLabel(run.protocol)} · ${integer(selected.length)} pages`}
+              <span className="bench-sample-protocol">
+                <i className={cn("bench-live", data.collecting && "is-collecting")} aria-hidden="true" />
+                {scoringLabel(run.protocol)}
+              </span>
+              <span className="bench-sample-count">{integer(selected.length)} pages</span>
             </>
           ) : (
             "No sample yet"
@@ -445,10 +448,15 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
               <i aria-hidden="true" />
               {data.collecting ? "Collecting" : "Live"}
             </span>
-            <span>
-              New sample every day at 00:15 UTC
-              {run?.finishedAt ? ` · Last completed ${utcTime(run.finishedAt)}` : ""}
-              {loading ? " · Updating…" : ""}
+            <span className="bench-status-copy">
+              <span>New sample every day at 00:15 UTC</span>
+              <span className="bench-status-completed">
+                {run?.finishedAt ? <>Last completed <time dateTime={run.finishedAt}>{utcTime(run.finishedAt)}</time></> : ""}
+              </span>
+            </span>
+            <span className={cn("bench-status-refresh", !loading && "invisible")} role="status" aria-hidden={!loading}>
+              <LoaderCircle className="bench-status-refresh-icon size-4 animate-spin motion-reduce:animate-none" aria-hidden="true" />
+              <span>Updating…</span>
             </span>
           </p>
           <div className="bench-status-actions">

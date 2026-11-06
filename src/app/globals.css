@@ -1070,18 +1070,32 @@ body:has(.bench-page)::after {
 .bench-rail-meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: var(--ds-space-1) var(--ds-space-2);
   padding-inline: var(--ds-space-1);
   color: var(--bench-muted);
-  font-size: var(--ds-text-body);
+  font-size: var(--ds-text-body-sm);
+  line-height: var(--ds-leading-normal);
 }
 .bench-rail-meta > span {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-0-5);
+  min-width: 0;
+}
+.bench-sample-protocol {
   display: inline-flex;
   align-items: center;
   gap: var(--ds-space-1-5);
-  min-width: 0;
+  color: var(--bench-text);
+  white-space: nowrap;
+}
+.bench-sample-count {
+  padding-left: var(--ds-space-3);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .bench-rail-meta button {
   flex-shrink: 0;
@@ -1101,8 +1115,8 @@ body:has(.bench-page)::after {
   height: 0.8rem;
 }
 .bench-live {
-  width: 0.4rem;
-  height: 0.4rem;
+  width: var(--ds-space-1-5);
+  height: var(--ds-space-1-5);
   flex-shrink: 0;
   border-radius: var(--ds-radius-pill);
   background: var(--ds-color-status-success);
@@ -1231,6 +1245,7 @@ body:has(.bench-page)::after {
 .bench-app {
   min-width: 0;
   padding: 0 var(--ds-space-4);
+  container-type: inline-size;
 }
 .bench-app > * {
   max-width: 78rem;
@@ -1252,10 +1267,30 @@ body:has(.bench-page)::after {
   color: var(--bench-muted);
   font-size: var(--ds-text-body);
 }
+.bench-status-copy {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--ds-text-body-sm);
+  line-height: var(--ds-leading-normal);
+  white-space: nowrap;
+}
+.bench-status-completed {
+  min-height: 1lh;
+  font-variant-numeric: tabular-nums;
+}
+.bench-status-refresh {
+  font-size: var(--ds-text-body-sm);
+  white-space: nowrap;
+}
+.bench-status-refresh-icon {
+  display: none;
+}
 .bench-status-chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--ds-space-1-5);
+  min-width: var(--ds-space-16);
   padding: var(--ds-space-0-5) var(--ds-space-2-5) var(--ds-space-0-5) var(--ds-space-2);
   border-radius: var(--ds-radius-pill);
   background: var(--ds-color-bg-tint);
@@ -2399,6 +2434,47 @@ body:has(.bench-page)::after {
 }
 
 /* Breakpoints -------------------------------------------------------------------------------- */
+@media (min-width: 64rem) {
+  @container (max-width: 48rem) {
+    .bench-status {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: var(--ds-space-2);
+      row-gap: var(--ds-space-1);
+      padding-inline: 0;
+    }
+    .bench-status p {
+      display: contents;
+    }
+    .bench-status-chip {
+      grid-row: 1;
+      grid-column: 1;
+      font-size: var(--ds-text-body-sm);
+    }
+    .bench-status-actions {
+      grid-row: 1;
+      grid-column: 3;
+    }
+    .bench-status-download {
+      padding-inline: var(--ds-space-3);
+    }
+    .bench-status-copy {
+      grid-row: 2;
+      grid-column: 1 / -1;
+    }
+    .bench-status-refresh {
+      grid-row: 1;
+      grid-column: 2;
+    }
+    .bench-status-refresh-icon {
+      display: block;
+    }
+    .bench-status-refresh > span {
+      @apply sr-only;
+    }
+  }
+}
 @media (max-width: 63.999rem) {
   .bench-pill-wrap {
     display: flex;
