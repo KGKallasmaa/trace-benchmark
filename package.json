@@ -1,0 +1,73 @@
+{
+  "name": "trace",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "overrides": {
+    "zod": "4.6.7",
+    "undici": "^7.30.1",
+    "@esbuild-kit/core-utils": {
+      "esbuild": "^0.25.0"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "^11.0.1"
+    },
+    "@oclif/core": {
+      "minimatch": "^11.0.1"
+    },
+    "@swc/cli": {
+      "minimatch": "^11.0.1"
+    },
+    "@vercel/queue": {
+      "minimatch": "^11.0.1"
+    }
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint src/app src/components/benchmark src/lib/benchmark",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "grade": "tsx scripts/grade.ts",
+    "audit": "tsx scripts/audit.ts",
+    "resummarize": "tsx scripts/resummarize.ts",
+    "test:unit": "tsx tests/analysis.test.ts",
+    "test:e2e": "tsx tests/benchmark.e2e.ts && tsx tests/wikipedia.e2e.ts && tsx tests/access.e2e.ts && tsx tests/history-filters.e2e.ts && tsx tests/batch-store.e2e.ts && tsx tests/collector-retry.e2e.ts && tsx tests/provider-pause.e2e.ts && tsx tests/judge-pause.e2e.ts && tsx tests/pacing-deadline.e2e.ts && tsx tests/continuous.e2e.ts && tsx tests/parallel.e2e.ts && tsx tests/grades.e2e.ts"
+  },
+  "dependencies": {
+    "@radix-ui/react-select": "^2.4.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "@radix-ui/react-tabs": "^1.2.1",
+    "@radix-ui/react-tooltip": "^1.4.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^18.0.4",
+    "drizzle-orm": "^0.45.3",
+    "fast-xml-parser": "^5.11.2",
+    "ipaddr.js": "^2.5.0",
+    "lucide-react": "^1.59.0",
+    "next": "16.4.2",
+    "nuqs": "2.10.2",
+    "pg": "^8.23.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "tsx": "^4.23.15",
+    "undici": "^7.30.1",
+    "workflow": "5.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^20",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "context-ds": "github:anwarlemu/context-dev-brand-cli#release",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

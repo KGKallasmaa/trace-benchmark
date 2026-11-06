@@ -1,0 +1,17 @@
+The MIT license applies to TRACE code, not to collected third-party page content,
+provider logos or upstream datasets. Raw responses, DOM and screenshots are
+private evidence and are excluded from the source release. Publishers retain
+rights to their pages. Provider marks identify the services being measured and
+do not imply endorsement.
+
+The fresh-sample approach is inspired by NEEDLE:
+https://github.com/keenableai/needle
+https://huggingface.co/datasets/keenable-ai/needle-results
+NEEDLE's authors are Andrey Styskin, Matthias Petri and Ilya Gusev.
+TRACE scores scraping, not NEEDLE search relevance. Upstream datasets retain
+their own license terms. The source release does not redistribute their corpus.
+
+The UI uses React, Next.js, Tailwind CSS, Radix UI, shadcn conventions, Lucide,
+and the Context.dev design system. Dependencies keep their original licenses.
+Rethink Sans, IBM Plex Mono, and Doto are distributed under the SIL Open Font
+License; their copyright notices and license texts are included in fonts/.

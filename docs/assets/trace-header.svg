@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc">
+  <title id="title">TRACE — a daily test of the open web</title>
+  <desc id="desc">A blue dot-matrix TRACE wordmark beside four equal paths connecting one shared sample to open results. No provider rankings or scores are depicted.</desc>
+  <rect width="1200" height="400" rx="24" fill="#f8faff"/>
+  <rect x="8" y="8" width="1184" height="384" rx="18" fill="#fff" stroke="#dce4f3"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="76" y="68" font-size="13" fill="#2563eb" letter-spacing="2.5">LIVE · OPEN SOURCE · DAILY</text>
+<circle cx="82" cy="112" r="5" fill="#111827"/><circle cx="96" cy="112" r="5" fill="#111827"/><circle cx="110" cy="112" r="5" fill="#111827"/><circle cx="124" cy="112" r="5" fill="#111827"/><circle cx="138" cy="112" r="5" fill="#111827"/><circle cx="110" cy="126" r="5" fill="#111827"/><circle cx="110" cy="140" r="5" fill="#111827"/><circle cx="110" cy="154" r="5" fill="#111827"/><circle cx="110" cy="168" r="5" fill="#111827"/><circle cx="110" cy="182" r="5" fill="#111827"/><circle cx="110" cy="196" r="5" fill="#111827"/><circle cx="172" cy="112" r="5" fill="#111827"/><circle cx="186" cy="112" r="5" fill="#111827"/><circle cx="200" cy="112" r="5" fill="#111827"/><circle cx="214" cy="112" r="5" fill="#111827"/><circle cx="172" cy="126" r="5" fill="#111827"/><circle cx="228" cy="126" r="5" fill="#111827"/><circle cx="172" cy="140" r="5" fill="#111827"/><circle cx="228" cy="140" r="5" fill="#111827"/><circle cx="172" cy="154" r="5" fill="#111827"/><circle cx="186" cy="154" r="5" fill="#111827"/><circle cx="200" cy="154" r="5" fill="#111827"/><circle cx="214" cy="154" r="5" fill="#111827"/><circle cx="172" cy="168" r="5" fill="#111827"/><circle cx="200" cy="168" r="5" fill="#111827"/><circle cx="172" cy="182" r="5" fill="#111827"/><circle cx="214" cy="182" r="5" fill="#111827"/><circle cx="172" cy="196" r="5" fill="#111827"/><circle cx="228" cy="196" r="5" fill="#111827"/><circle cx="276" cy="112" r="5" fill="#111827"/><circle cx="290" cy="112" r="5" fill="#111827"/><circle cx="304" cy="112" r="5" fill="#111827"/><circle cx="262" cy="126" r="5" fill="#111827"/><circle cx="318" cy="126" r="5" fill="#111827"/><circle cx="262" cy="140" r="5" fill="#111827"/><circle cx="318" cy="140" r="5" fill="#111827"/><circle cx="262" cy="154" r="5" fill="#111827"/><circle cx="276" cy="154" r="5" fill="#111827"/><circle cx="290" cy="154" r="5" fill="#111827"/><circle cx="304" cy="154" r="5" fill="#111827"/><circle cx="318" cy="154" r="5" fill="#111827"/><circle cx="262" cy="168" r="5" fill="#111827"/><circle cx="318" cy="168" r="5" fill="#111827"/><circle cx="262" cy="182" r="5" fill="#111827"/><circle cx="318" cy="182" r="5" fill="#111827"/><circle cx="262" cy="196" r="5" fill="#111827"/><circle cx="318" cy="196" r="5" fill="#111827"/><circle cx="366" cy="112" r="5" fill="#111827"/><circle cx="380" cy="112" r="5" fill="#111827"/><circle cx="394" cy="112" r="5" fill="#111827"/><circle cx="408" cy="112" r="5" fill="#111827"/><circle cx="352" cy="126" r="5" fill="#111827"/><circle cx="352" cy="140" r="5" fill="#111827"/><circle cx="352" cy="154" r="5" fill="#111827"/><circle cx="352" cy="168" r="5" fill="#111827"/><circle cx="352" cy="182" r="5" fill="#111827"/><circle cx="366" cy="196" r="5" fill="#111827"/><circle cx="380" cy="196" r="5" fill="#111827"/><circle cx="394" cy="196" r="5" fill="#111827"/><circle cx="408" cy="196" r="5" fill="#111827"/><circle cx="442" cy="112" r="5" fill="#111827"/><circle cx="456" cy="112" r="5" fill="#111827"/><circle cx="470" cy="112" r="5" fill="#111827"/><circle cx="484" cy="112" r="5" fill="#111827"/><circle cx="498" cy="112" r="5" fill="#111827"/><circle cx="442" cy="126" r="5" fill="#111827"/><circle cx="442" cy="140" r="5" fill="#111827"/><circle cx="442" cy="154" r="5" fill="#111827"/><circle cx="456" cy="154" r="5" fill="#111827"/><circle cx="470" cy="154" r="5" fill="#111827"/><circle cx="484" cy="154" r="5" fill="#111827"/><circle cx="442" cy="168" r="5" fill="#111827"/><circle cx="442" cy="182" r="5" fill="#111827"/><circle cx="442" cy="196" r="5" fill="#111827"/><circle cx="456" cy="196" r="5" fill="#111827"/><circle cx="470" cy="196" r="5" fill="#111827"/><circle cx="484" cy="196" r="5" fill="#111827"/><circle cx="498" cy="196" r="5" fill="#111827"/>
+    <text x="76" y="267" font-size="28" fill="#111827">A fresh test of the open web.</text>
+    <text x="76" y="307" font-size="18" fill="#526078">Fresh pages. Shared tests. Open results.</text>
+    <path d="M664 72V328" stroke="#e5eaf2"/>
+    <rect x="720" y="163" width="44" height="54" rx="7" fill="#fff" stroke="#2563eb" stroke-width="2"/>
+    <path d="M731 178H752M731 188H749M731 198H745" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+    <g fill="none" stroke="#9db9f7" stroke-width="2">
+      <path d="M764 190C800 190 793 92 844 92H937C982 92 980 190 1018 190"/>
+      <path d="M764 190C800 190 803 156 844 156H937C977 156 982 190 1018 190"/>
+      <path d="M764 190C800 190 803 222 844 222H937C977 222 982 190 1018 190"/>
+      <path d="M764 190C800 190 793 286 844 286H937C982 286 980 190 1018 190"/>
+    </g>
+    <g fill="#fff" stroke="#2563eb" stroke-width="2">
+      <circle cx="883" cy="92" r="10"/>
+      <circle cx="883" cy="156" r="10"/>
+      <circle cx="883" cy="222" r="10"/>
+      <circle cx="883" cy="286" r="10"/>
+    </g>
+    <path d="M1018 190H1062" fill="none" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="1018" cy="190" r="5" fill="#2563eb"/>
+    <rect x="1062" y="160" width="64" height="60" rx="8" fill="#eff4ff" stroke="#b7cdfa"/>
+    <path d="M1076 175H1111M1076 187H1105M1076 199H1097" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+    <text x="924" y="341" text-anchor="middle" font-size="17" fill="#526078">One sample. Four equal paths.</text>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+.git
+artifacts
+state
+node_modules
+.env*
+.next
+**/._*
+**/.DS_Store
