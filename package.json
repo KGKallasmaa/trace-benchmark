@@ -39,6 +39,7 @@
     "test:e2e": "tsx tests/benchmark.e2e.ts && tsx tests/wikipedia.e2e.ts && tsx tests/access.e2e.ts && tsx tests/history-filters.e2e.ts && tsx tests/batch-store.e2e.ts && tsx tests/collector-retry.e2e.ts && tsx tests/provider-pause.e2e.ts && tsx tests/judge-pause.e2e.ts && tsx tests/pacing-deadline.e2e.ts && tsx tests/continuous.e2e.ts && tsx tests/parallel.e2e.ts && tsx tests/grades.e2e.ts"
   },
   "dependencies": {
+    "@databuddy/sdk": "^3.4.7",
     "@radix-ui/react-select": "^2.4.1",
     "@radix-ui/react-slot": "^1.5.0",
     "@radix-ui/react-tabs": "^1.2.1",

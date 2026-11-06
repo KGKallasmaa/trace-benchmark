@@ -1,9 +1,11 @@
+import { Databuddy } from "@databuddy/sdk/react";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { THEME_BOOT_SCRIPT } from "@/components/trace/theme-toggle";
 import { dsFontVariables } from "@/lib/ds-fonts";
+import { serverEnv } from "@/lib/env.server";
 
 import "./globals.css";
 
@@ -34,6 +36,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <NuqsAdapter>{children}</NuqsAdapter>
+        {serverEnv.databuddyClientId && (
+          <Databuddy clientId={serverEnv.databuddyClientId} trackWebVitals replay />
+        )}
       </body>
     </html>
   );
