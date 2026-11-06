@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://trace.context.dev/">
-  <img src="docs/assets/trace-header.svg" alt="TRACE: a fresh test of the open web, with four equal paths through one shared benchmark." width="960">
+  <img src="docs/assets/trace-header.png" alt="TRACE by context.dev: how reliably can web scrapers read a page? Each day a new fresh sample goes to context.dev, Exa, Firecrawl, and Keenable." width="960">
 </a>
 
 <h1>TRACE</h1>
