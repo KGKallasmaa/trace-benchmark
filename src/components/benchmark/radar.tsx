@@ -31,23 +31,33 @@ export function Radar({
     observer.observe(container.current);
     return () => observer.disconnect();
   }, []);
-  const radius = Math.max(40, width / 2 - (width < 500 ? 104 : 96));
-  const height = radius * 2 + 128;
-  const cx = width / 2,
-    cy = height / 2;
-  const point = (i: number, value: number, extra = 0) => {
-    const angle = (i * 2 * Math.PI) / chartCategories.length - Math.PI / 2;
-    return [
-      cx + Math.cos(angle) * (radius * value + extra),
-      cy + Math.sin(angle) * (radius * value + extra),
-    ];
-  };
   const shortNames: Record<string, string[]> = {
     legal_regulatory: ["Legal"],
     software_docs: ["Docs"],
     arts_sports_reference: ["Arts &", "reference"],
   };
   const labels = chartCategories.map((c) => shortNames[c.id] ?? [c.name]);
+  const angleOf = (i: number) => (i * 2 * Math.PI) / chartCategories.length - Math.PI / 2;
+  // Narrow screens: the largest radius whose side labels still fit, using a conservative
+  // estimate of the label width at the phone label size (see .bench-radar text).
+  const narrow = width < 500;
+  const fitted = chartCategories.reduce((r, _, i) => {
+    const reach = Math.abs(Math.cos(angleOf(i)));
+    if (reach < 0.05) return r;
+    const labelWidth = Math.max(...labels[i].map((l) => l.length)) * 8;
+    return Math.min(r, (width / 2 - 4 - labelWidth) / reach - 20);
+  }, width / 2 - 24);
+  const radius = Math.max(40, narrow ? fitted : width / 2 - 96);
+  const height = radius * 2 + (narrow ? 96 : 128);
+  const cx = width / 2,
+    cy = height / 2;
+  const point = (i: number, value: number, extra = 0) => {
+    const angle = angleOf(i);
+    return [
+      cx + Math.cos(angle) * (radius * value + extra),
+      cy + Math.sin(angle) * (radius * value + extra),
+    ];
+  };
   return (
     <>
       <Legend

@@ -1280,6 +1280,28 @@ body:has(.bench-page)::after {
   width: 0.9rem;
   height: 0.9rem;
 }
+.bench-status-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2-5);
+  min-width: 0;
+  min-height: 2.75rem;
+  color: var(--ds-color-text-brand);
+}
+.bench-status-brand svg {
+  flex-shrink: 0;
+}
+.bench-status-brand span {
+  color: var(--bench-text);
+  font-size: var(--ds-text-body-lg);
+  font-weight: var(--ds-font-weight-regular);
+  white-space: nowrap;
+}
+@media (min-width: 64rem) {
+  .bench-status-brand {
+    display: none;
+  }
+}
 
 /* Section frames ---------------------------------------------------------------------------- */
 .bench-frame {
@@ -1325,7 +1347,8 @@ body:has(.bench-page)::after {
 }
 .bench-eyebrow {
   display: flex;
-  align-items: center;
+  /* Long eyebrows wrap on phones; the section number stays on the first line. */
+  align-items: baseline;
   gap: var(--ds-space-2-5);
   color: var(--ds-color-text-secondary);
   font-size: var(--ds-text-body);
@@ -2277,8 +2300,22 @@ body:has(.bench-page)::after {
   white-space: nowrap;
 }
 .bench-pill-date svg {
-  width: 0.85rem;
-  height: 0.85rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--ds-color-text-secondary);
+}
+.bench-pill-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bench-pill-chevron {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  margin-right: var(--ds-space-1);
+  color: var(--ds-color-text-subtle);
 }
 :root[data-theme="dark"] .bench-pill {
   background: var(--ds-color-bg-subtle);
@@ -2312,6 +2349,14 @@ body:has(.bench-page)::after {
   display: flex;
   justify-content: center;
   min-height: 1.75rem;
+}
+.bench-sheet-title {
+  position: absolute;
+  top: 0;
+  left: var(--ds-space-2);
+  line-height: 2.25rem;
+  color: var(--ds-color-text-secondary);
+  font-size: var(--ds-text-body);
 }
 .bench-sheet-handle {
   width: 2.25rem;
@@ -2370,18 +2415,17 @@ body:has(.bench-page)::after {
   .bench-matrix-corner span {
     white-space: nowrap;
   }
-  .bench-verdicts li {
-    grid-template-columns: minmax(0, 1fr) auto;
-    row-gap: 0;
-    padding-block: var(--ds-space-2);
+  /* The three sample figures share one row until the sidebar layout stacks them. */
+  .bench-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--ds-space-4) var(--ds-space-6);
   }
-  .bench-verdict-count {
-    grid-row: 2;
-    grid-column: 1;
+  .bench-stats .bench-stats-group {
+    display: contents;
   }
-  .bench-verdict {
-    grid-row: 1 / span 2;
-    grid-column: 2;
+  .bench-stats .bench-stats-group > div {
+    justify-content: flex-end;
   }
   .bench-matrix-row.is-head {
     font-size: var(--ds-text-body-sm);
@@ -2392,27 +2436,32 @@ body:has(.bench-page)::after {
   .bench-matrix-label {
     font-size: var(--ds-text-body-sm);
   }
+  /* Header row: brand and actions, then the live status as one line of text. */
   .bench-status {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    row-gap: var(--ds-space-1);
+    gap: var(--ds-space-2) var(--ds-space-3);
+    padding-block: var(--ds-space-3) var(--ds-space-4);
   }
-  .bench-status p {
-    display: contents;
-  }
-  .bench-status-chip {
+  .bench-status-brand {
     grid-row: 1;
     grid-column: 1;
   }
   .bench-status-actions {
     grid-row: 1;
-    grid-column: 3;
+    grid-column: 2;
   }
-  .bench-status p > span:not(.bench-status-chip) {
+  .bench-status p {
+    display: block;
     grid-row: 2;
     grid-column: 1 / -1;
     font-size: var(--ds-text-body-sm);
+    line-height: 1.75;
+  }
+  .bench-status-chip {
+    margin-right: var(--ds-space-2);
+    vertical-align: 0.05em;
   }
   .bench-filters button,
   .bench-tabs [role="tab"],
@@ -2726,5 +2775,181 @@ body:has(.bench-page)::after {
 @media (min-width: 64rem) {
   .bench-split.is-table {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+}
+
+/* Phones -------------------------------------------------------------------------------------
+   Sections run edge to edge with a single gutter, so charts and tables get the full width.
+   Cards keep their ring, which sits inside that gutter. */
+@media (max-width: 39.999rem) {
+  .bench-app {
+    padding-inline: 0;
+  }
+  .bench-status,
+  .bench-footer {
+    padding-inline: var(--ds-space-4);
+  }
+  .bench-frame {
+    gap: var(--ds-space-6);
+    padding: var(--ds-space-10) var(--ds-space-4) var(--ds-space-8);
+    border-inline: 0;
+  }
+  .bench-frame::before,
+  .bench-frame::after {
+    display: none;
+  }
+  .bench-frame-title {
+    gap: var(--ds-space-2);
+  }
+  .bench-overview {
+    gap: var(--ds-space-8);
+  }
+  /* Verdicts: the pair on one line, then the count and the call. */
+  .bench-verdicts li {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: var(--ds-space-0-5);
+    padding-block: var(--ds-space-2-5);
+  }
+  .bench-verdicts li > :first-child {
+    grid-column: 1 / -1;
+  }
+  .bench-verdict-count {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  .bench-verdict {
+    grid-row: 2;
+    grid-column: 2;
+  }
+  .bench-stats {
+    gap: var(--ds-space-4);
+  }
+  .bench-stats .bench-stats-group > div {
+    gap: var(--ds-space-2);
+  }
+  /* Scales down on the narrowest phones so four digits never meet the next figure. */
+  .bench-stats dd {
+    font-size: min(var(--ds-text-h3), 8.2vw);
+  }
+  .bench-stats dt {
+    font-size: var(--ds-text-body-sm);
+    line-height: 1.4;
+  }
+  /* Failures: name and share on one line, the full-width bar below. */
+  .bench-failure-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name value" "track track";
+    row-gap: var(--ds-space-2);
+    padding-block: var(--ds-space-3);
+  }
+  .bench-failure-name {
+    grid-area: name;
+  }
+  .bench-failure-track {
+    grid-area: track;
+  }
+  .bench-failure-row strong {
+    grid-area: value;
+  }
+  .bench-radar text {
+    font-size: var(--ds-text-body-sm);
+  }
+  .bench-legend {
+    row-gap: 0;
+  }
+}
+/* The narrowest phones keep the download action as an icon; its name stays for assistive tech. */
+@media (max-width: 22.499rem) {
+  .bench-status-download {
+    width: 2.75rem;
+    padding-inline: 0;
+  }
+  .bench-status-download-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Phone tables: each row is a card of label and value lines instead of stacked pairs. */
+@media (max-width: 580px) {
+  .bench-frame .bench-scroll tr {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ds-space-1-5);
+    padding: var(--ds-space-3-5) var(--ds-space-4);
+  }
+  .bench-frame .bench-scroll th,
+  .bench-frame .bench-scroll td {
+    padding: 0;
+  }
+  .bench-frame .bench-scroll th {
+    padding-bottom: var(--ds-space-1);
+    color: var(--bench-text);
+  }
+  .bench-frame .bench-scroll td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--ds-space-4);
+    text-align: right;
+  }
+  .bench-frame .bench-scroll td::before {
+    flex: 0 1 auto;
+    max-width: 62%;
+    margin: 0;
+    color: var(--ds-color-text-secondary);
+    text-align: left;
+  }
+  /* Short numeric tables fit two label and value pairs per line. */
+  .bench-frame .bench-pairs-table tr,
+  .bench-frame .bench-category-table tr {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--ds-space-6);
+  }
+  .bench-frame .bench-pairs-table td,
+  .bench-frame .bench-category-table td {
+    gap: var(--ds-space-2);
+  }
+  .bench-frame .bench-pairs-table td::before,
+  .bench-frame .bench-category-table td::before {
+    max-width: none;
+    white-space: nowrap;
+  }
+  .bench-frame .bench-pairs-table td:last-child {
+    grid-column: auto;
+  }
+  .bench-frame .bench-category-table td:last-child {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+  .bench-frame .bench-category-table td:last-child::before {
+    display: none;
+  }
+  /* Sources: category and source count on one line, examples underneath. */
+  .bench-frame .bench-text-table tr {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: var(--ds-space-1);
+  }
+  .bench-frame .bench-text-table th {
+    grid-column: 1;
+    padding-bottom: 0;
+  }
+  .bench-frame .bench-text-table td:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .bench-frame .bench-text-table td:last-child {
+    display: block;
+    grid-column: 1 / -1;
+    width: auto;
+    color: var(--ds-color-text-secondary);
+    text-align: left;
+  }
+  .bench-frame .bench-text-table td:last-child::before {
+    display: none;
   }
 }

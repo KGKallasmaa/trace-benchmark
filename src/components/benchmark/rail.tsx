@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { PanelLeft, PanelLeftOpen, SlidersHorizontal, ChevronUp, X, House, ChartNoAxesColumn, ArrowLeftRight, Shapes, Timer, FileCheck2, DollarSign, CircleAlert, History, Database, FlaskConical, Code2, CircleHelp, Quote, type LucideIcon } from "lucide-react";
+import { PanelLeft, PanelLeftOpen, SlidersHorizontal, ChevronUp, CalendarDays, X, House, ChartNoAxesColumn, ArrowLeftRight, Shapes, Timer, FileCheck2, DollarSign, CircleAlert, History, Database, FlaskConical, Code2, CircleHelp, Quote, type LucideIcon } from "lucide-react";
 import { ContextMark } from "@/components/trace/provider-logo";
 import { ThemeToggle } from "@/components/trace/theme-toggle";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
@@ -89,7 +89,8 @@ export function BenchRail({
 }) {
   const { active, progress } = useActiveSection();
   const [rail, setRail] = useState<"auto" | "expanded" | "collapsed">("auto");
-  const [sheet, setSheet] = useState(false);
+  // "sample" opens the sheet with focus on the sample date control instead of the current section.
+  const [sheet, setSheet] = useState<false | "sections" | "sample">(false);
   const pill = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
@@ -150,7 +151,11 @@ export function BenchRail({
     const previous = document.activeElement as HTMLElement | null;
     const trigger = pill.current;
     const panel = sheetRef.current;
-    (panel?.querySelector<HTMLElement>("a[aria-current]") ?? panel?.querySelector<HTMLElement>("a"))?.focus();
+    const start =
+      sheet === "sample"
+        ? panel?.querySelector<HTMLElement>(".bench-sheet-sample button")
+        : panel?.querySelector<HTMLElement>("a[aria-current]") ?? panel?.querySelector<HTMLElement>("a");
+    start?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSheet(false);
       if (event.key !== "Tab" || !panel) return;
@@ -256,20 +261,21 @@ export function BenchRail({
             type="button"
             className="bench-pill-main"
             aria-haspopup="dialog"
-            aria-expanded={sheet}
-            onClick={() => setSheet(true)}
+            aria-expanded={Boolean(sheet)}
+            onClick={() => setSheet("sections")}
           >
             <svg viewBox="0 0 20 20" aria-hidden="true" className="bench-pill-progress">
               <circle cx="10" cy="10" r="8" />
               <circle cx="10" cy="10" r="8" style={{ strokeDasharray: `${progress * 50.27} 50.27` }} />
             </svg>
             <span className="bench-nav-number">{number(activeIndex)}</span>
-            <span>{sections[activeIndex].label}</span>
+            <span className="bench-pill-label">{sections[activeIndex].label}</span>
             <span className="sr-only">. Open the section list</span>
+            <ChevronUp aria-hidden="true" className="bench-pill-chevron" />
           </button>
-          <button type="button" className="bench-pill-date" onClick={() => setSheet(true)} aria-label={`Sample ${shortDate}. Change the sample`}>
+          <button type="button" className="bench-pill-date" onClick={() => setSheet("sample")} aria-label={`Sample ${shortDate}. Change the sample`}>
+            <CalendarDays aria-hidden="true" />
             {shortDate}
-            <ChevronUp aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -278,6 +284,7 @@ export function BenchRail({
           <button type="button" className="bench-sheet-scrim" aria-label="Close the section list" onClick={() => setSheet(false)} tabIndex={-1} />
           <div ref={sheetRef} className="bench-sheet" role="dialog" aria-modal="true" aria-label="Sections and sample">
             <div className="bench-sheet-head">
+              <span className="bench-sheet-title" aria-hidden="true">Sections</span>
               <span className="bench-sheet-handle" aria-hidden="true" />
               <button type="button" className="bench-sheet-close" onClick={() => setSheet(false)} aria-label="Close">
                 <X aria-hidden="true" />

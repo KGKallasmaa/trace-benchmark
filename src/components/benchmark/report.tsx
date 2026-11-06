@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CodeBlock, CodeWindow } from "@/components/site/code-window";
+import { ContextMark } from "@/components/trace/provider-logo";
 import { HeroDotField } from "@/components/visuals/hero-dot-field";
 import { Surface } from "@/lib/surface";
 import { cn } from "@/lib/utils";
@@ -387,6 +388,7 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
   );
   const leaderTable = (
     <Table
+      className="bench-pairs-table"
       label={accessOnly ? "Page access results" : "Useful content results"}
       headers={["Provider", "Place", accessOnly ? "Accessed" : "Useful", accessOnly ? "Not accessed" : "Not useful", "Unresolved", "Excluded", "Pending", "Score", "95% CI"]}
       rows={order.map((id) => {
@@ -433,6 +435,11 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
       />
       <div className="bench-app">
         <div className="bench-status">
+          {/* Below the sidebar breakpoint the rail is hidden, so the status row carries the brand. */}
+          <a href="#overview" className="bench-status-brand" aria-label="TRACE overview">
+            <ContextMark className="h-[0.95rem] w-auto" />
+            <span>TRACE</span>
+          </a>
           <p>
             <span className="bench-status-chip">
               <i aria-hidden="true" />
@@ -447,7 +454,7 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
           <div className="bench-status-actions">
             <Button variant="pill" size="sm" className="bench-status-download" onClick={download} disabled={!run} data-download-results>
               <Download aria-hidden="true" />
-              Download data
+              <span className="bench-status-download-label">Download data</span>
             </Button>
             <Button variant="ghost" size="icon" className="size-11 rounded-pill text-fg" asChild>
               <a href={repo} aria-label="Trace benchmark on GitHub">
@@ -723,6 +730,7 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
                 chart={<LatencyStrips rows={order.map((id) => lat.find((l) => l.id === id)!)} />}
                 table={
                   <Table
+                    className="bench-pairs-table"
                     label="Response time percentiles"
                     headers={["Provider", "p50", "p90", "p95", "p99", "Successful p50", "Successful p95", "Timeouts"]}
                     rows={order.map((id) => {
