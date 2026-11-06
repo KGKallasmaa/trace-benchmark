@@ -30,6 +30,8 @@ The full-scale fixture also checks 2,500 pages across all four providers within 
 
 For UI changes, follow the design-system checks in AGENTS.md and verify desktop, phone, keyboard, and empty/error states. For documentation, validate relative links, examples, and any score snapshot against a dated published run.
 
+After editing public documentation, run `npm run docs:agents`. The full agent references are generated from an explicit list of public documents. After building the app, `npm run test:agents` verifies HTTP access, document freshness, crawler discovery, database-outage fallback, and protected operational routes using local fixtures.
+
 ## Code map
 
 | Location | Responsibility |

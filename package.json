@@ -24,7 +24,10 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run docs:agents",
     "build": "next build",
+    "docs:agents": "node scripts/generate-agent-docs.mjs",
+    "test:agents": "node scripts/generate-agent-docs.mjs --check && node tests/agent-docs.e2e.mjs",
     "start": "next start",
     "lint": "eslint src/app src/components/benchmark src/lib/benchmark",
     "db:generate": "drizzle-kit generate",

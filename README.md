@@ -104,7 +104,9 @@ Public endpoints require no credentials:
 | [`/api/report`](https://trace.context.dev/api/report) | Latest sample, historical summaries, health, and paginated result rows |
 | [`/api/benchmark`](https://trace.context.dev/api/benchmark) | The dataset used by the report, including page-level outcomes for the selected run |
 | `/api/download?run=<run-id>` | A run's page-level outcomes as newline-delimited JSON |
-| [`/llms.txt`](https://trace.context.dev/llms.txt) | A plain-text report for agents and assistants |
+| [`/llms.txt`](https://trace.context.dev/llms.txt) | Concise documentation index for agents |
+| [`/llms-full.txt`](https://trace.context.dev/llms-full.txt) | Full agent reference with live results; `/llms.full.txt` is an alias |
+| [`/results.md`](https://trace.context.dev/results.md) | Current scores and analysis in Markdown, without JavaScript |
 
 ```sh
 # Inspect the latest published sample.
@@ -117,6 +119,8 @@ curl -fsSG https://trace.context.dev/api/download \
 ```
 
 Both JSON endpoints accept `?run=<run-id>`. `/api/report` also accepts `provider` and a zero-based `page`. Public downloads contain outcomes and provenance; raw scraped text, private grading evidence, and credentials are excluded.
+
+Agent documentation is also committed as [llms.txt](llms.txt), [llms-full.txt](llms-full.txt), and [llms.full.txt](llms.full.txt). Run `npm run docs:agents` after editing the public documentation; production builds regenerate the full reference automatically. `/robots.txt` allows public crawling and excludes the collection trigger and Workflow callbacks. HTTP `Link` headers advertise the agent index and the Markdown report.
 
 ## Contribute
 

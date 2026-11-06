@@ -77,3 +77,13 @@ After changing summary rules, `npm run resummarize -- --write` recomputes stored
 ## Verification
 
 Use the commands and disposable-database precautions in [CONTRIBUTING.md](../CONTRIBUTING.md). Build the production app before running the HTTP Workflow tests, so the 60-second fixture assertion does not include development-server compilation.
+
+## Agent and crawler access
+
+The public site provides `/llms.txt` as a concise index, `/llms-full.txt` as a complete reference with live results, and `/results.md` as the current Markdown report. `/llms.full.txt` redirects to the full reference; `/index.md` redirects to the Markdown report. All support unauthenticated GET and HEAD requests without browser JavaScript or cookies. The index and full reference remain readable when results are unavailable.
+
+`/robots.txt` permits public crawling and excludes `/api/cron` and `/.well-known/workflow/`. Robots directives are advisory; cron authentication and Workflow verification remain responsible for protecting operational routes. `/sitemap.xml` advertises the report, and HTTP `Link` headers advertise the agent index and Markdown alternative.
+
+For a Vercel deployment, keep the AI Bots managed ruleset on Allow for this public benchmark. Check that custom rules, attack mode, or deployment protection do not challenge public read routes. Preserve system DDoS protections and operational authentication. User-agent strings alone do not prove crawler identity. Verify both project firewall configuration and actual GET/HEAD responses after deployment; a robots file cannot override an edge firewall.
+
+Regenerate the committed full references with `npm run docs:agents` whenever public documentation changes. The generator reads only its explicit public-document list. `npm run test:agents` checks the production app against local result fixtures, including a results outage and crawler user agents.
