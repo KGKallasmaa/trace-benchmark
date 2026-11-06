@@ -120,22 +120,9 @@ try {
         .map(element => element.className);
     });
     assert.deepEqual(overflow, [], `${label}: header content fits its container`);
-    if (expanded) {
-      assert.equal(await page.locator(".bench-sample-count").textContent(), "2,527 pages");
-      const summary = await page.locator(".bench-rail-meta").evaluate(element => {
-        const count = element.querySelector(".bench-sample-count");
-        const protocol = element.querySelector(".bench-sample-protocol");
-        const button = element.querySelector("button");
-        return { countHeight: count.getBoundingClientRect().height, lineHeight: parseFloat(getComputedStyle(count).lineHeight),
-          protocolBottom: protocol.getBoundingClientRect().bottom, countTop: count.getBoundingClientRect().top,
-          countRight: count.getBoundingClientRect().right, buttonLeft: button.getBoundingClientRect().left };
-      });
-      assert.ok(summary.countHeight <= summary.lineHeight + 1, `${label}: page count stays on one line`);
-      assert.ok(summary.protocolBottom <= summary.countTop + 1, `${label}: protocol and count have separate rows`);
-      assert.ok(summary.countRight < summary.buttonLeft, `${label}: Filters has its own space beside the count`);
-      await page.getByRole("button", { name: "Filters", exact: true }).click();
-      await page.waitForFunction(() => location.hash === "" && document.activeElement?.closest("#sample"));
-    }
+    assert.equal(await page.locator(".bench-rail-meta, .bench-sample-protocol, .bench-sample-count").count(), 0,
+      `${label}: sidebar sample summary is removed`);
+    assert.equal(await page.getByRole("button", { name: "Filters", exact: true }).count(), 0);
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({ path: resolve(evidence, `${width}${expanded ? "-expanded" : ""}.png`) });
     const download = page.waitForEvent("download");
@@ -158,7 +145,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await page.route("**/api/benchmark?*", route => route.fulfill({ status: 503, json: { error: "Unavailable" } }));
   await page.goto(base, { waitUntil: "networkidle" });
-  assert.equal(await page.locator(".bench-rail-meta").textContent(), "No sample yetFilters");
+  assert.equal(await page.locator(".bench-rail-meta").count(), 0);
   assert.equal(await page.locator(".bench-status-completed").textContent(), "");
   assert.ok((await page.locator(".bench-status-completed").boundingBox()).height > 0);
   assert.ok(await page.locator("[data-download-results]").isDisabled());

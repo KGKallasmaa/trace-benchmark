@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { PanelLeft, PanelLeftOpen, SlidersHorizontal, ChevronUp, CalendarDays, X, House, ChartNoAxesColumn, ArrowLeftRight, Shapes, Timer, FileCheck2, DollarSign, CircleAlert, History, Database, FlaskConical, Code2, CircleHelp, Quote, type LucideIcon } from "lucide-react";
+import { PanelLeft, PanelLeftOpen, ChevronUp, CalendarDays, X, House, ChartNoAxesColumn, ArrowLeftRight, Shapes, Timer, FileCheck2, DollarSign, CircleAlert, History, Database, FlaskConical, Code2, CircleHelp, Quote, type LucideIcon } from "lucide-react";
 import { ContextMark } from "@/components/trace/provider-logo";
 import { ThemeToggle } from "@/components/trace/theme-toggle";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
@@ -73,18 +73,13 @@ function go(id: string) {
 
 export function BenchRail({
   sample,
-  meta,
   glance,
-  onFilters,
   shortDate,
 }: {
   /** The sample date control. */
   sample: ReactNode;
-  /** One line under the date, such as the protocol and page count. */
-  meta: ReactNode;
   /** A compact, always-visible summary of the leaderboard. */
   glance: ReactNode;
-  onFilters: () => void;
   shortDate: string;
 }) {
   const { active, progress } = useActiveSection();
@@ -238,13 +233,6 @@ export function BenchRail({
           </div>
           <div className="bench-rail-sample">
             {sample}
-            <div className="bench-rail-meta">
-              <span>{meta}</span>
-              <button type="button" onClick={onFilters}>
-                <SlidersHorizontal aria-hidden="true" />
-                Filters
-              </button>
-            </div>
           </div>
           <nav ref={navRef} className="bench-rail-nav" aria-label="Sections">{nav("rail")}</nav>
           <div className="bench-rail-glance">{glance}</div>

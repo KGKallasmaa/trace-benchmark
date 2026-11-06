@@ -416,24 +416,7 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
     <Surface kind="site" className="bench-page">
       <BenchRail
         sample={sampleSelect}
-        meta={
-          run ? (
-            <>
-              <span className="bench-sample-protocol">
-                <i className={cn("bench-live", data.collecting && "is-collecting")} aria-hidden="true" />
-                {scoringLabel(run.protocol)}
-              </span>
-              <span className="bench-sample-count">{integer(selected.length)} pages</span>
-            </>
-          ) : (
-            "No sample yet"
-          )
-        }
         glance={glance}
-        onFilters={() => {
-          document.getElementById("useful-content")?.scrollIntoView({ behavior: "smooth" });
-          setTimeout(() => document.querySelector<HTMLElement>("#sample button")?.focus({ preventScroll: true }), 400);
-        }}
         shortDate={requestedRun ? shortDate(requestedRun.day) : "Sample"}
       />
       <div className="bench-app">
