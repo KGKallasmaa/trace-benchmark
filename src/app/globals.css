@@ -1355,7 +1355,7 @@ body:has(.bench-page)::after {
   font-size: var(--ds-text-body);
   font-weight: var(--ds-font-weight-regular);
 }
-.bench-eyebrow span {
+.bench-eyebrow > span:first-child {
   color: var(--ds-color-text-brand);
   font-family: var(--ds-font-mono);
   font-weight: 400;

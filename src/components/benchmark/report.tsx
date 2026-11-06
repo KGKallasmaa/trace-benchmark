@@ -68,7 +68,7 @@ function Frame({
 }: {
   id: string;
   index: number;
-  eyebrow: string;
+  eyebrow: ReactNode;
   title: ReactNode;
   accent?: ReactNode;
   lede?: ReactNode;
@@ -471,7 +471,14 @@ export function BenchmarkReport({ initial, sources }: { initial: BenchmarkDatase
             id="overview"
             index={1}
             as="h1"
-            eyebrow="TRACE (Transparent Real-world Assessment of Content Extraction)"
+            eyebrow={
+              <>
+                <span className="sm:hidden">Daily web scraping benchmark</span>
+                <span className="hidden sm:inline">
+                  TRACE (Transparent Real-world Assessment of Content Extraction)
+                </span>
+              </>
+            }
             title="How reliably can web scrapers"
             accent="read a page?"
           >
